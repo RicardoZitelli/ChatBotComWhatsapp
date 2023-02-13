@@ -29,9 +29,11 @@ namespace ChatBotComWhatsapp.Controllers
 
             TwilioClient.Init(accountSid, authToken);
 
-            var messageOptions = new CreateMessageOptions(new PhoneNumber($"whatsapp:+55{toNumber}"));            
-            messageOptions.From = new PhoneNumber("whatsapp:+14155238886");
-            messageOptions.Body = body;
+            var messageOptions = new CreateMessageOptions(new PhoneNumber($"whatsapp:+55{toNumber}"))
+            {
+                From = new PhoneNumber("whatsapp:+14155238886"),
+                Body = body
+            };
 
             var message = MessageResource.Create(messageOptions);
             
