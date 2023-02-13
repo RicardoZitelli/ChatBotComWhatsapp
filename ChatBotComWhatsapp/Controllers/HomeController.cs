@@ -10,7 +10,7 @@ namespace ChatBotComWhatsapp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        // Your Account SID and Auth Token from twilio.com/console
+        // Your Account SID and Auth Token from twilio.com/console 
         const string accountSid = "AC7516404a3b4544f7fa2683f11d7aee58";
         const string authToken = "b92297d712a042ad092645acb25e648e";
 
