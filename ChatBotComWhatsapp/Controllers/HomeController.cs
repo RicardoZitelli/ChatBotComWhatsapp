@@ -10,19 +10,23 @@ namespace ChatBotComWhatsapp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        // Your Account SID and Auth Token from twilio.com/console 
-        const string accountSid = "AC7516404a3b4544f7fa2683f11d7aee58";
-        const string authToken = "b92297d712a042ad092645acb25e648e";
-
+                
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
-              
-
+        
         [HttpPost(Name = "SendMessage")]
         public string SendMessage(string toNumber, string body)
         {
+#if DEBUG
+            var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.Development.json").Build();
+#else
+            var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+#endif
+            var accountSid = MyConfig.GetValue<string>("Twilio:accountSid");
+            var authToken = MyConfig.GetValue<string>("Twilio:authToken");
+
             TwilioClient.Init(accountSid, authToken);
 
             var messageOptions = new CreateMessageOptions(new PhoneNumber($"whatsapp:+55{toNumber}"));            
